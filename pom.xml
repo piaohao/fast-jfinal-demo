@@ -12,7 +12,7 @@
         <dependency>
             <groupId>org.piaohao</groupId>
             <artifactId>fast-jfinal</artifactId>
-            <version>1.0.0</version>
+            <version>1.0.2</version>
         </dependency>
     </dependencies>
 
@@ -35,22 +35,49 @@
                 </configuration>
             </plugin>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-assembly-plugin</artifactId>
-                <version>2.5.5</version>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>appassembler-maven-plugin</artifactId>
+                <version>1.10</version>
                 <configuration>
-                    <finalName>${project.name}-${project.version}</finalName>
-                    <appendAssemblyId>false</appendAssemblyId>
-                    <archive>
-                        <manifest>
-                            <mainClass>org.piaohao.fast.jfinal.demo.MainApp</mainClass>
-                        </manifest>
-                    </archive>
-                    <descriptorRefs>
-                        <descriptorRef>jar-with-dependencies</descriptorRef>
-                    </descriptorRefs>
+                    <!-- 生成linux, windows两种平台的执行脚本 -->
+                    <platforms>
+                        <platform>windows</platform>
+                        <platform>unix</platform>
+                    </platforms>
+                    <!-- 根目录 -->
+                    <assembleDirectory>${project.build.directory}/${project.name}</assembleDirectory>
+                    <!-- 打包的jar，以及maven依赖的jar放到这个目录里面 -->
+                    <repositoryName>lib</repositoryName>
+                    <!-- 可执行脚本的目录 -->
+                    <binFolder>bin</binFolder>
+                    <!-- 配置文件的目标目录 -->
+                    <configurationDirectory>webapp</configurationDirectory>
+                    <!-- 拷贝配置文件到上面的目录中 -->
+                    <copyConfigurationDirectory>true</copyConfigurationDirectory>
+                    <!-- 从哪里拷贝配置文件 (默认src/main/config) -->
+                    <configurationSourceDirectory>src/main/resources</configurationSourceDirectory>
+                    <!-- lib目录中jar的存放规则，默认是${groupId}/${artifactId}的目录格式，flat表示直接把jar放到lib目录 -->
+                    <repositoryLayout>flat</repositoryLayout>
+                    <encoding>UTF-8</encoding>
+                    <logsDirectory>logs</logsDirectory>
+                    <tempDirectory>tmp</tempDirectory>
+                    <programs>
+                        <program>
+                            <id>${project.name}-${project.version}</id>
+                            <!-- 启动类 -->
+                            <mainClass>org.piaohao.fast.jfinal.Bootstrap</mainClass>
+                            <jvmSettings>
+                                <extraArguments>
+                                    <extraArgument>-server</extraArgument>
+                                    <extraArgument>-Xmx200M</extraArgument>
+                                    <extraArgument>-Xms200M</extraArgument>
+                                </extraArguments>
+                            </jvmSettings>
+                        </program>
+                    </programs>
                 </configuration>
             </plugin>
+
         </plugins>
     </build>
 

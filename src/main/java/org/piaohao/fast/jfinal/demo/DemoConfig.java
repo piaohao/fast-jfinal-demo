@@ -2,6 +2,7 @@ package org.piaohao.fast.jfinal.demo;
 
 import com.jfinal.config.*;
 import com.jfinal.kit.PathKit;
+import com.jfinal.kit.PropKit;
 import com.jfinal.template.Engine;
 import com.jfinal.template.source.ClassPathSourceFactory;
 
@@ -9,7 +10,8 @@ public class DemoConfig extends JFinalConfig {
     @Override
     public void configConstant(Constants constants) {
         constants.setDevMode(true);
-        PathKit.setWebRootPath("templates");
+        PathKit.setWebRootPath("WEB-INF/view");
+        PropKit.use("app.properties");
     }
 
     @Override
