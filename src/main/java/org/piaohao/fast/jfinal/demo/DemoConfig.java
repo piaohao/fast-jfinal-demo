@@ -5,6 +5,7 @@ import com.jfinal.kit.PathKit;
 import com.jfinal.kit.PropKit;
 import com.jfinal.template.Engine;
 import com.jfinal.template.source.ClassPathSourceFactory;
+import org.piaohao.fast.jfinal.LogRequestInterceptor;
 
 public class DemoConfig extends JFinalConfig {
     @Override
@@ -31,7 +32,7 @@ public class DemoConfig extends JFinalConfig {
 
     @Override
     public void configInterceptor(Interceptors interceptors) {
-
+        interceptors.add(new LogRequestInterceptor());
     }
 
     @Override
