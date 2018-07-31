@@ -9,7 +9,7 @@ fast-jfinal的演示项目
 <dependency>
     <groupId>org.piaohao</groupId>
     <artifactId>fast-jfinal</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.3</version>
 </dependency>
 ````
 
