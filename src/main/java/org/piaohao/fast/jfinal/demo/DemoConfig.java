@@ -3,6 +3,7 @@ package org.piaohao.fast.jfinal.demo;
 import com.jfinal.config.*;
 import com.jfinal.kit.PathKit;
 import com.jfinal.kit.PropKit;
+import com.jfinal.plugin.redis.RedisPlugin;
 import com.jfinal.template.Engine;
 import com.jfinal.template.source.ClassPathSourceFactory;
 import org.piaohao.fast.jfinal.LogRequestInterceptor;
@@ -10,7 +11,7 @@ import org.piaohao.fast.jfinal.LogRequestInterceptor;
 public class DemoConfig extends JFinalConfig {
     @Override
     public void configConstant(Constants constants) {
-        constants.setDevMode(true);
+        constants.setDevMode(false);
         PathKit.setWebRootPath("WEB-INF/view");
         PropKit.use("app.properties");
     }
@@ -27,7 +28,8 @@ public class DemoConfig extends JFinalConfig {
 
     @Override
     public void configPlugin(Plugins plugins) {
-
+//        RedisPlugin rp = new RedisPlugin("main", "119.27.160.180", 6379, "19911026");
+//        plugins.add(rp);
     }
 
     @Override
